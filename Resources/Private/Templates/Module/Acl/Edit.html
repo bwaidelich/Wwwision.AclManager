@@ -1,0 +1,55 @@
+<f:layout name="Default" />
+
+<f:section name="subtitle">
+	<div class="neos-module-container">
+		<h2>Edit ACLs for role "{role.name}" ({role.identifier})</h2>
+	</div>
+</f:section>
+
+<f:section name="content">
+	<div class="neos-row-fluid neos-module-container">
+		<fieldset class="neos-span12">
+			<legend>Privileges</legend>
+			<table class="neos-table">
+				<thead>
+					<tr>
+						<th>Privilege</th>
+						<th>Permission</th>
+					</tr>
+				</thead>
+				<f:for each="{privilegesByType}" as="privileges" key="privilegeType" iteration="privilegeTypeIteration">
+					<tr class="neos-folder">
+						<td class="neos-priority1">
+							<strong>{f:translate(id: privilegeType)}</strong> <small>({privileges -> f:count()})</small>
+						</td>
+						<td class="neos-priority1 neos-aRight">
+							<i class="fold-toggle icon-chevron-down icon-white" data-toggle="privilege-{privilegeTypeIteration.cycle}"></i>
+						</td>
+					</tr>
+					<f:for each="{privileges}" as="privilege" iteration="privilegeIteration">
+						<tr class="privilege-{privilegeTypeIteration.cycle} {f:if(condition: '{privilege.permission} == \'grant\'', then: 'success')}{f:if(condition: '{privilege.permission} == \'abstain\'', then: 'warning')}{f:if(condition: '{privilege.permission} == \'deny\'', then: 'danger')}">
+							<td class="neos-priority1">{privilege.privilegeTargetIdentifier}</td>
+							<td><strong class="pull-right">{privilege.permission}</strong></td>
+						</tr>
+						<tr>
+							<td colspan="2"><pre><code class="css">{privilege.matcher}</code></pre></td>
+						</tr>
+						<f:for each="{privilege.parameters}" as="parameter" iteration="parameterIteration">
+							<tr>
+								<td><label for="parameter-{privilegeTypeIteration.cycle}-{privilegeIteration.cycle}-{parameterIteration.cycle}">{parameter.name}</label></td>
+								<td>
+									<f:render partial="Parameter/{parameter.type}" arguments="{parameter: parameter, uniqueIdentifier: 'parameter-{privilegeTypeIteration.cycle}-{privilegeIteration.cycle}-{parameterIteration.cycle}'}" />
+								</td>
+							</tr>
+						</f:for>
+					</f:for>
+				</f:for>
+			</table>
+		</fieldset>
+	</div>
+
+	<div class="neos-footer">
+		<f:link.action action="index" class="neos-button">Cancel</f:link.action>
+	</div>
+
+</f:section>

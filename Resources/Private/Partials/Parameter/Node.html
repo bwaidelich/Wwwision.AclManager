@@ -1,0 +1,6 @@
+<input type="text" id="{uniqueIdentifier}" list="{uniqueIdentifier}-list" value="{parameter.value}" class="form-control" />
+<datalist id="{uniqueIdentifier}-list">
+	<f:for each="{parameter.possibleValues}" as="label" key="value">
+		<option value="{value}">{label}</option>
+	</f:for>
+</datalist>

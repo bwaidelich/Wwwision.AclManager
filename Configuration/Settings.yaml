@@ -1,0 +1,11 @@
+TYPO3:
+  Neos:
+    modules:
+      administration:
+        submodules:
+          acl:
+            label: 'ACL Management'
+            controller: 'Wwwision\AclManager\Controller\AclController'
+            description: 'The ACL Management module provides you with an overview of all backend user roles and their privileges.'
+            icon: 'icon-lock'
+            privilegeTarget: 'TYPO3.Neos:Backend.Module.Administration.Users'

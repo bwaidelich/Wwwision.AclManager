@@ -1,0 +1,6 @@
+-
+  requestFilter: 'parentRequest.isPackage("TYPO3.Neos") && isPackage("Wwwision.AclManager") && isController("Acl")'
+  options:
+    layoutPathAndFilename: 'resource://TYPO3.Neos/Private/Layouts/BackendModule.html'
+    partialRootPaths: ['resource://TYPO3.Neos/Private/Partials', 'resource://Wwwision.AclManager/Private/Partials']
+    templateRootPaths: ['resource://Wwwision.AclManager/Private/Templates/Module', 'resource://Wwwision.AclManager/Private/Templates']

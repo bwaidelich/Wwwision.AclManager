@@ -1,0 +1,40 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<div class="jumbotron">
+		<h1>{role.name} <small>({role.identifier})</small></h1>
+	</div>
+
+	<h1>Privileges</h1>
+		<f:for each="{privilegesByType}" as="privileges" key="privilegeType" iteration="privilegeTypeIteration">
+			<h2 title="{privilegeTargetType.type}" data-toggle="collapse" data-target="#privilege-{privilegeTypeIteration.cycle}">
+				{f:translate(id: privilegeType)}
+				<small>({privileges -> f:count()})</small>
+			</h2>
+			<div class="collapse" id="privilege-{privilegeTypeIteration.cycle}">
+				<f:for each="{privileges}" as="privilege" iteration="privilegeIteration">
+					<table class="table" data-toggle="collapse" data-target="#privilege-{privilegeTypeIteration.cycle}-{privilegeIteration.cycle}">
+						<tr class="{f:if(condition: '{privilege.permission} == \'grant\'', then: 'success')}{f:if(condition: '{privilege.permission} == \'abstain\'', then: 'warning')}{f:if(condition: '{privilege.permission} == \'deny\'', then: 'danger')}">
+							<td><strong>{privilege.privilegeTargetIdentifier}</strong></td>
+							<td class="col-xs-5"><strong class="pull-right">{privilege.permission}</strong></td>
+						</tr>
+					</table>
+					<table class="collapse table" id="privilege-{privilegeTypeIteration.cycle}-{privilegeIteration.cycle}">
+						<tr>
+							<td colspan="2"><pre><code class="css">{privilege.matcher}</code></pre></td>
+						</tr>
+						<f:for each="{privilege.parameters}" as="parameter" iteration="parameterIteration">
+							<tr>
+								<td><label for="parameter-{privilegeTypeIteration.cycle}-{privilegeIteration.cycle}-{parameterIteration.cycle}">{parameter.name}</label></td>
+								<td>
+									<f:render partial="Parameter/{parameter.type}" arguments="{parameter: parameter, uniqueIdentifier: 'parameter-{privilegeTypeIteration.cycle}-{privilegeIteration.cycle}-{parameterIteration.cycle}'}" />
+								</td>
+							</tr>
+						</f:for>
+					</table>
+				</f:for>
+			</div>
+		</f:for>
+	<tabel>
+
+</f:section>

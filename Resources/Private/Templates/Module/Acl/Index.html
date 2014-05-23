@@ -1,0 +1,28 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<div class="neos-row-fluid">
+		<table class="neos-table">
+			<thead>
+				<tr>
+					<th>Role</th>
+					<th>Package</th>
+					<th>&nbsp;</th>
+				</tr>
+			</thead>
+			<f:for each="{roles}" as="role">
+				<tr title="{role.identifier}">
+					<td><i class="icon-group icon-white"></i> {role.name}</td>
+					<td>{role.packageKey}</td>
+					<td class="neos-action">
+						<div class="neos-pull-right">
+							<f:link.action action="edit" arguments="{role: role.identifier}" class="neos-button neos-button-primary" title="Edit role">
+								<i class="icon-pencil icon-white"></i>
+							</f:link.action>
+						</div>
+					</td>
+				</tr>
+			</f:for>
+		</table>
+	</div>
+</f:section>

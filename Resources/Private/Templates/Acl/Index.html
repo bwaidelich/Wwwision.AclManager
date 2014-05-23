@@ -1,0 +1,12 @@
+<f:layout name="Default" />
+
+<f:section name="content">
+	<table class="table table-striped">
+		<f:for each="{roles}" as="role">
+			<tr title="{role.identifier}">
+				<td><f:link.action action="edit" arguments="{role: role.identifier}">{role.name}</f:link.action></td>
+				<td><f:link.action action="edit" arguments="{role: role.identifier}"><span class="glyphicon glyphicon-pencil"></span></f:link.action>
+			</tr>
+		</f:for>
+	</table>
+</f:section>
